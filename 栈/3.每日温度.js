@@ -44,3 +44,18 @@ var dailyTemperatures1 = function(T){
 }
 
 console.log(dailyTemperatures1([73, 74, 75, 71, 69, 72, 76, 73]))
+
+var dailyTemperatures2 = function(T){
+  let stack = [],
+      result = []
+  debugger
+  for(let i=T.length -1 ; i>=0; i--){
+    while(stack.length!==0 && T[i]>T[stack[stack.length - 1]]) stack.pop()
+    result[i] = stack.length === 0 ? 0 : stack[stack.length - 1] - i
+    stack.push(i)
+  }
+
+  return result
+}
+
+console.log(dailyTemperatures2([73, 74, 75, 71, 69, 72, 76, 73]))
