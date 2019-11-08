@@ -55,4 +55,50 @@ b.neighbors.push(c,a)
 c.neighbors.push(d,b)
 d.neighbors.push(a,c)
 
-cloneGraph(a)
+// cloneGraph(a)
+
+// 不依赖具体属性的深拷贝，但仍然需要使用到Map映射
+// var cloneGraph1 = function (node) {
+//   const o = {},
+//         srcQueue = [],
+//         desQueue = [],
+//         map = new Map()
+
+//   srcQueue.push(node)
+//   desQueue.push(o)
+//   while(srcQueue.length !== 0){
+//     let temp = srcQueue.shift(),
+//         obj = desQueue.shift()
+    
+//     for(const key in temp){
+//       if(Object.prototype.hasOwnProperty.call(temp,key)){
+//         let prop = temp[key]
+//         let type = typeof prop
+//         switch(type){
+//           case 'object':
+//             if(map.has(prop)){
+//               obj[key] = map.get(prop)
+//               break
+//             }
+//             if(Array.isArray(prop)){
+//               obj[key] = [] 
+//             } else {
+//               obj[key] = {}
+//             }
+//             srcQueue.push(prop)
+//             desQueue.push(obj[key])
+//             break
+//           default:
+//             obj[key] = prop
+//         }
+//       } else {
+//         obj.__proto__[key] =  prop
+//       }
+//     }
+//     if(!Array.isArray(temp) && !map.has(temp)) map.set(temp, obj)
+//   }
+//   console.log(o)
+//   return o
+// }
+
+// cloneGraph1(a)
