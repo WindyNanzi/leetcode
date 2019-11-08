@@ -103,11 +103,12 @@ var cloneGraph1 = function (node) {
 
 cloneGraph1(a)
 
-// 采用了递归形式的深拷贝。同样无法通过测试，原因同上
+// 采用了递归形式的深拷贝。通过测试!
 var cloneGraph2 = function (node){
   const o = Object.create(null),
         visited = new Map()
   const _clone = (src,dis) => {
+    if(!Array.isArray(src) && !visited.has(src)) visited.set(src,dis)
     for(const key in src){
       if(Object.prototype.hasOwnProperty.call(src,key)){
         let prop = src[key]
@@ -124,7 +125,6 @@ var cloneGraph2 = function (node){
               dis[key] = Object.create(null)
             }
             if(!visited.has(prop)){
-              if(!Array.isArray(prop)) {visited.set(prop, dis[key])}
               _clone(prop, dis[key])
             }
             break
