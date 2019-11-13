@@ -39,3 +39,25 @@ let tree  = {
 }
 
 inorderTraversal(tree)
+
+
+// 非递归实现中序遍历二叉树
+var inorderTraversal1 = function(root){
+    const result = [],
+          stack = []
+    
+    // 需要明确的一点是循环终止的条件
+    while(root!== null || stack.length !== 0){
+        if(root !== null){
+            stack.push(root)
+            root = root.left
+        }else{
+            root = stack.pop()
+            result.push(root.val)
+            root = root.right
+        }
+    }
+    console.log(result)
+    return result
+}
+inorderTraversal1(tree)
