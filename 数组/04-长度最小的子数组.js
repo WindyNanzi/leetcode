@@ -122,3 +122,53 @@ var minSubArrayLen2 = function(target, nums) {
 }
 
 console.log(minSubArrayLen2(7, [2,3,1,2,4,3]))
+
+/** 拓展  */
+
+/**
+ * 水果成篮
+ * 
+ * https://leetcode-cn.com/problems/fruit-into-baskets/
+ * 
+ * 原题目不太容易理解，换个描述方式：
+ * 给定一个数组，找出其中最长的子数组的长度。这个子数组应该满足这个条件：包含至多两种不同的值。
+ * 示例：
+ * 输入 fruits = [2,3,3,2,4,3] 输出：4 解释：子数组 [2,3,3,2] 是该条件下的长度最小的子数组。
+ * 输入 fruits = [3,3,3,1,2,1,1,2,3,3,4] 输出：5 解释：子数组 [1,2,1,1,2] 是该条件下的长度最小的子数组。
+ */
+
+
+/**
+ * @param {number[]} fruits
+ * @return {number}
+ */
+var totalFruit = function(fruits) {
+  // 本题采取和上题一样的，快慢指针
+  // repeat 用来记录重复出现的元素长度
+  let left = 0, max = 0, repeat = 1
+  const len = fruits.length
+  let types = []
+
+  for(let right = 0; right < len; right++) {
+    if(types.includes(fruits[right])) {
+      repeat = fruits[right] === fruits[right - 1] ? repeat + 1 : 1;
+      continue
+    }
+    if(types.length < 2) {
+      types.push(fruits[right])
+      // 前面几个元素不计入
+      repeat = 1
+    } else {
+      max = Math.max(max , right - left)
+      types = [fruits[right - 1], fruits[right]]
+      left = right - repeat
+      repeat = 1
+    }
+  }
+
+  return Math.max(max, len - left)
+};
+
+// [0,1,1,0,6,6,4,4,6]
+// [1,0,1,4,1,4,1,2,3]
+console.log('水果成篮：', totalFruit([3,3,3,1,2,1,1,2,3,3,4]))
