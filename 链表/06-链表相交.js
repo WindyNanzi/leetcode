@@ -26,22 +26,15 @@ getIntersectionNode([2,6,4], [1,5]) // null
  * @param {ListNode} headA
  * @param {ListNode} headB
  * @return {ListNode}
+ * 本题采用了 https://leetcode-cn.com/problems/intersection-of-two-linked-lists-lcci/solution/mian-shi-ti-0207-lian-biao-xiang-jiao-sh-b8hn/ 的题解
  */
 var getIntersectionNode = function(headA, headB) {
-  const cache = []
-  while(headA) {
-    if(!cache.includes(headA)) {
-      cache.push(headA)
-    }
-    headA = headA.next
+  let A = headA, B = headB
+
+  while(A !== B) {
+    A = A === null ? headB : A.next
+    B = B === null ? headA : B.next
   }
 
-  while(headB) {
-    if(cache.includes(headB)) {
-      return headB
-    }
-    headB = headB.next
-  }
-
-  return null
+  return A
 };
