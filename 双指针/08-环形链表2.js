@@ -24,16 +24,15 @@ var detectCycle = function (head) {
   // a + b + n(b+c) = 2(a+b)
   // n(b+c) = a + b
   // a = c + (n-1)(b + c)
-  while(fast) {
   let slow = head, fast = head
-  
 
+  while(fast) {  
     slow = slow.next
     fast = fast.next?.next
 
     if(fast === slow) {
       let ptr = head
-      while(prt !== next) {
+      while(prt !== slow) {
         ptr = ptr.next
         slow = slow.next
       }
